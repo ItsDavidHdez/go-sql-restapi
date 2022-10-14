@@ -34,8 +34,7 @@ func main() {
 	// Users auth endpoints
 	router.HandleFunc(api + "/register", routes.CreateUserHandler).Methods("POST")
 	router.HandleFunc(api + "/login", routes.LoginUserHandler).Methods("POST")
-	router.HandleFunc(api + "/validate", routes.Test).Methods("GET")
-
+	
 	http.ListenAndServe(":3000", router)
 }
 
