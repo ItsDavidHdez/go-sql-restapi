@@ -11,15 +11,59 @@ import (
 
 	"github.com/ItsDavidHdez/go-sql-restapi/db"
 	"github.com/ItsDavidHdez/go-sql-restapi/models"
+	jwt "github.com/dgrijalva/jwt-go"
 )
 
+func validToken(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tokenStr := cookie.Value
+
+	claims := &Claims{}
+
+	tkn, err := jwt.ParseWithClaims(tokenStr, claims,
+		func(t *jwt.Token) (interface{}, error) {
+			return []byte(os.Getenv("SECRET")), nil
+		})
+
+	if err != nil {
+		if err == jwt.ErrSignatureInvalid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if !tkn.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	fmt.Printf("You are logged")
+}
+
+
 func GetAllMusicHander(w http.ResponseWriter, r *http.Request) {
+
+	validToken(w, r)
+
 	var songs []models.Music
 	db.DB.Find(&songs)
 	json.NewEncoder(w).Encode(&songs)
 }
 
 func GetMusicHander(w http.ResponseWriter, r *http.Request) {
+	validToken(w, r)
+	
 	var responseObject models.Response
 	var music models.Music
 	term := r.URL.Query().Get("term")
