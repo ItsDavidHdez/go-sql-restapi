@@ -32,4 +32,18 @@ For music and songs have 2 routes.
 
 ## Technologies
 
-This api his made in **Golang** with **Mux** para el CRUD, **Postgres** as database and others librarys for encrypt password, generate the token for the auth and **Gorm** for generate the tables in the database from the models created.
+This api his made in **Golang** with **Mux** para el CRUD, **Postgres** as database with Docker and others librarys for encrypt password, generate the token for the auth and **Gorm** for generate the tables in the database from the models created.
+
+## Environment variables
+
+This project work with importants 7 vars. A example:
+
+PORT=1234
+SECRET=secretWord
+HOST=localhost
+USER=myUser
+PASSWORD=passWordDB
+DATABASE_NAME=golang-db
+DATABASE_PORT=5678
+
+It's just a example...
