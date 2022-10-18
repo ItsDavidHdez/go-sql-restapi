@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: cvtenqkpfjohub
+      POSTGRES_PASSWORD: 4777d3010a8496824c6b340076b8d76558edf00395d252aef38a54e7877f5148
+      POSTGRES_DB: dedgm2bd4tgfqg
+      POSTGRES_HOST: ec2-54-227-248-71.compute-1.amazonaws.com
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
