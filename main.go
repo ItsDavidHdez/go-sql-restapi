@@ -24,6 +24,7 @@ func main() {
 	// Music endpoints
 	router.HandleFunc(api + "/songs", routes.GetAllMusicHander).Methods("GET")
 	router.HandleFunc(api + "/music", routes.GetMusicHander).Methods("POST")
+	router.HandleFunc(api + "/lyrics", routes.GetMusicSoapHandler).Methods("POST")
 
 	// Users endpoints
 	router.HandleFunc(api + "/", routes.HomeHandler)
