@@ -22,11 +22,16 @@ For the auth exist 2 routes.
   After it return a token like: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IiIsImV4cCI6MTY2NTcxMjAxNH0.1q4e2iHSJlgbu3fkAPdRSAHyp-y2FscKjIhLH-0c8P0`
   NOTE: If you is not register you will can't login, first you register.
 
-For music and songs have 2 routes.
+For music and songs have 3 routes.
 
 - /api/v1/songs **GET**: endpoint for get all the songs in the data base.
 - /api/v1/music **POST**: endpoint for get the song for search from iTunes API for beet the params. Require a _term_ for the search, for example:
   `http://localhost:3000/api/v1/music?term=luis+miguel+ayer`
+  It will search and automatic save the result in the database
+  NOTE: If you is not register o is don't login, you will can’t watch or save a song, first you login.
+
+- /api/v1/lyrics **POST**: endpoint for get the song for search from iTunes API for beet the params. Require a _artist_ and _song_ params for the search, for example:
+  `localhost:3000/api/v1/lyrics?artist=shakira&song=waka+waka`
   It will search and automatic save the result in the database
   NOTE: If you is not register o is don't login, you will can’t watch or save a song, first you login.
 
@@ -47,3 +52,11 @@ DATABASE_NAME=golang-db
 DATABASE_PORT=5678
 
 It's just a example...
+
+## Docker
+
+This project have a docker-compose.yml for get postgres with his correct version, the database be in Heroku online. If exist a error to connect contactme plis.
+
+Only run:
+
+`docker-compose up --build`
